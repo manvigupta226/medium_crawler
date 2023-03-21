@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My Blog Crawler</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        $("#crawl-form").on("submit", function (event) {
+          event.preventDefault();
+          var tag = $("#tag-input").val();
+          $.ajax({
+            url: "/myapp/crawl-blogs/",
+            type: "POST",
+            data: { tag: tag },
+            success: function (data) {
+              $("#result").html("Crawling completed successfully!");
+            },
+            error: function (xhr, textStatus, errorThrown) {
+              $("#result").html("Error crawling blogs: " + errorThrown);
+            },
+          });
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <h1>My Blog Crawler</h1>
+    <form id="crawl-form">
+      <label for="tag-input">Enter a tag to crawl:</label>
+      <input type="text" id="tag-input" />
+      <button type="submit">Crawl</button>
+    </form>
+    <div id="result"></div>
+  </body>
+</html>

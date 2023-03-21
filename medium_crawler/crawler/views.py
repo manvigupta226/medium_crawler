@@ -1,12 +1,15 @@
 # This will handle the AJAX request from the frontend for crawling the blogs
 
-
+from django.shortcuts import render
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from bs4 import BeautifulSoup
 import requests
 import time
 from .models import Blog
+
+def home(request):
+    return render(request, 'home.html')
 
 
 @csrf_exempt
